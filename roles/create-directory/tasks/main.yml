@@ -1,4 +1,4 @@
 - name: Creates directory
   file:
-    path: /src/www
+    path: /home/ansibleslave1
     state: directory
