@@ -1,0 +1,28 @@
+---
+- hosts: all
+  tasks:
+    - name: Make sure that we can connect to the machine
+      ping:
+
+    - name: Stop Tomcat
+      command: sh /opt/apache-tomcat-8.5.16/bin/shutdown.sh
+      become: true
+      become_user: tomcat
+
+    - name: Remove Tomcat
+      file:
+        path: /opt/apache-tomcat-8.5.16
+        state: absent
+
+    - name: remove user "tomcat"
+      user:
+        name: tomcat
+        state: absent
+
+    - name: remove group "tomcat"
+      group:
+        name: tomcat
+        state: absent
+       
+        # Command to execute
+        # $ansible-playbook -i ansible-inventory tomcat-install.yml -k
